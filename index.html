@@ -7,6 +7,11 @@
     <title>Quotes</title>
   </head>
   <body>
+    <textarea></textarea>
+    <div>
+      <button class="double">To double</button>
+      <button class="single">To single</button>
+    </div>
     <script>
       const defaultText = `
         One: 'Hi Mary.' Two: 'Oh, hi.'
@@ -25,9 +30,20 @@
         One: 'That's great. Well, you better get going. You don't want to be late.'
         Two: 'I'll see you next time.'
         One: 'Sure. Bye.'`;
+      textarea = document.querySelector("textarea");
+      textarea.value = defaultText;
+      textarea.style.width = "500px";
+      textarea.style.height = "500px";
 
       const regExp1 = /((?<=\W)\')|(\'(?=\W))/g;
-      console.log(defaultText.replaceAll(regExp1, `"`));
+      const regExp2 = /((?<=\W)\")|(\"(?=\W))/g;
+
+      document.querySelector(".double").addEventListener("click", (ev) => {
+        textarea.value = textarea.value.replaceAll(regExp1, `"`);
+      });
+      document.querySelector(".single").addEventListener("click", (ev) => {
+        textarea.value = textarea.value.replaceAll(regExp2, `'`);
+      });
 
       /*
       Код ниже был изначальным, потому что я хотел найти, но не сразу нашёл
